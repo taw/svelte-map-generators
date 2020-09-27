@@ -4,14 +4,15 @@
   import Civ1 from "./Civ1.svelte";
   import DiamondSquare from "./DiamondSquare.svelte";
 
-  let generator = "uniform"
-
   let menu = [
     {value: "uniform", nav: "Uniform", header: "Uniform Noise", component: Uniform},
     {value: "diamond", nav: "Diamond Square", header: "Diamond Square", component: DiamondSquare},
     {value: "perlin", nav: "Perlin", header: "Perlin Noise Island", component: Perlin},
     {value: "civ1", nav: "Civ1", header: "Civ1 Style Map", component: Civ1},
   ]
+  let generator = "civ1"
+
+  $: selected = menu.find(m => m.value === generator)
 </script>
 
 <style>
@@ -46,18 +47,9 @@
   {/each}
 </navbar>
 
-{#if generator === "uniform"}
-  <header>Uniform Noise</header>
-  <Uniform />
-{:else if generator === "perlin"}
-  <header>Perlin Noise Island</header>
-  <Perlin />
-{:else if generator === "civ1"}
-  <header>Civ1 Style Map</header>
-  <Civ1/>
-{:else if generator === "diamond"}
-  <header>Diamond Square</header>
-  <DiamondSquare/>
+{#if selected}
+  <header>{selected.header}</header>
+  <svelte:component this={selected.component}/>
 {:else}
   <p>No generator selected.</p>
 {/if}
