@@ -20,7 +20,7 @@ function surflet(x, y, grad_x, grad_y) {
   return f(x) * f(y) * (grad_x * x + grad_y * y);
 }
 
-function noise(x, y) {
+export default function perlin_noise(x, y) {
   let result = 0.0;
   let cell_x = Math.floor(x);
   let cell_y = Math.floor(y);
@@ -46,5 +46,3 @@ function init() {
 }
 
 init();
-
-export default noise;

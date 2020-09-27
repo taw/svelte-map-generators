@@ -1,5 +1,5 @@
 <script>
-  import {xsize, ysize, initialize_map} from "./civ1.js";
+  import {xsize, ysize, generate} from "../generators/civ1.js";
 
   let colors = {
     ocean: "blue",
@@ -14,14 +14,10 @@
     forest: "#282",
   }
 
-  let map = initialize_map();
+  let map = generate();
 </script>
 
 <style>
-  header {
-    font-size: 400%;
-    text-align: center;
-  }
   .map {
     background-color: #ccc;
     height: 750px;
@@ -34,8 +30,6 @@
     stroke: black;
   }
 </style>
-
-<header>Civ1 Style Map</header>
 
 <svg class="map">
   {#each Array(ysize) as _, y}

@@ -2,17 +2,14 @@
 // https://forums.civfanatics.com/threads/civ1-map-generation-explained.498630/
 // but not a complete reimplementation
 
+import randint from "../util/randint.js";
 
-// globals oops
+// awkward globals
 let heightmap = [];
 let map = [];
 
 let xsize = 80;
 let ysize = 50;
-
-function randint(min, max) {
-  return min + Math.floor(Math.random() * (max - min + 1));
-}
 
 function create_empty_heightmap() {
   for (let y = 0; y < ysize; y++) {
@@ -169,7 +166,7 @@ function setup_arctic() {
   }
 }
 
-function initialize_map() {
+function generate() {
   create_empty_heightmap();
   add_land();
   // fix_straits();
@@ -181,4 +178,4 @@ function initialize_map() {
   return map;
 }
 
-export {xsize, ysize, initialize_map};
+export {xsize, ysize, generate};
