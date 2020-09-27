@@ -9,6 +9,8 @@
       points.push({x,y,c});
     }
   }
+
+  console.log("uniform", points)
 </script>
 
 <style>
