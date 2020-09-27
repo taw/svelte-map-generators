@@ -14,39 +14,55 @@
     return t;
   }
 
-  for(let x=0; x<xsize; x++) {
-    for(let y=0; y<ysize; y++) {
+  for (let x=0; x<xsize; x++) {
+    for (let y=0; y<ysize; y++) {
       // arbitrary jitter and scale
-      let n =    noise((x + jx)/4, (y + jy)/4) +
-          0.5 *  noise((x + jx)/8, (y + jy)/8) +
-          0.25 * noise((x + jx)/16, (y + jy)/16) +
-          0.125 * noise((x + jx)/32, (y + jy)/32) +
-          0.125 * noise((x + jx)/64, (y + jy)/64);
-      let z = 1 + 0.5 + 0.25 + 0.125 + 0.125;
+      let n =
+          0.4 * noise((x + jx)/1, (y + jy)/1) +
+          0.8 * noise((x + jx)/2, (y + jy)/2) +
+          0.8 * noise((x + jx)/4, (y + jy)/4) +
+          0.4 * noise((x + jx)/8, (y + jy)/8) +
+          0.2 * noise((x + jx)/16, (y + jy)/16) +
+          0.1 * noise((x + jx)/32, (y + jy)/32) +
+          0.05 * noise((x + jx)/64, (y + jy)/64);
+      let z = 0.4 + 0.8 + 0.8 + 0.4 + 0.2 + 0.1 + 0.05
       // go way down on edges
       let cx = Math.abs(2*x/(xsize-1) - 1)
       let cy = Math.abs(2*y/(ysize-1) - 1)
-      n -= Math.pow(cx, 5) + Math.pow(cy, 5)
-
-      n = clamp01(((n / z) + 1) / 2);
-      let c;
-      if (n < 0.45) {
-        c = 'blue;'
-      } else if (n < 0.50) {
-        c = 'green';
-      } else if (n < 0.55) {
-        c = 'yellow';
-      } else if (n < 0.60) {
-        c = 'orange';
-      } else {
-        c = 'red';
-      }
-      // let q = Math.round(n * 255);
-      // c = `rgb(${q},${q},${q})`;
-      points.push({x,y,c});
+      let h = n/z - Math.max( Math.pow(cx, 2), Math.pow(cy, 2) )
+      points.push({x,y,h});
     }
   }
-  </script>
+
+  function ntile(ary, ntile) {
+    return ary[Math.floor(ntile * ary.length)];
+  }
+
+  let heights_histogram = points.map(({h}) => h).sort((a,b) => a-b);
+  let water_level = ntile(heights_histogram, 0.35);
+  let hill_level = ntile(heights_histogram, 0.7);
+  let mountain_level = ntile(heights_histogram, 0.97);
+
+  console.log([
+    mountain_level,
+    hill_level,
+    water_level
+  ])
+
+  for(let pt of points) {
+    let c;
+    if (pt.h >= mountain_level) {
+      c = 'red'
+    } else if (pt.h >= hill_level) {
+      c = 'orange'
+    } else if (pt.h >= water_level) {
+      c = 'lime'
+    } else {
+      c = 'blue'
+    }
+    pt.c = c;
+  }
+</script>
 
   <style>
   header {
@@ -69,7 +85,7 @@
   <header>Perlin Noise</header>
 
   <svg class="map">
-    {#each points as {x,y,c}}
-      <rect x={10*x} y={10*y} height=10 width=10 style={`fill:${c}`} />
+    {#each points as {x,y,c,h}}
+      <rect x={10*x} y={10*y} height=10 width=10 style={`fill:${c}`} data-h={h} />
     {/each}
   </svg>
