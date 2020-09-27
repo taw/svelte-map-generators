@@ -117,8 +117,6 @@
         }
         let rainfall = randint(0, 5);
         if (t === "mountain") rainfall += 3;
-        wetness -= rainfall;
-        if (wetness < 0) wetness = 0;
         if (wetness > 0) {
           if (t === "desert") {
             map[y][x] = "plains"
@@ -131,6 +129,8 @@
           } else {
             // OK
           }
+          wetness -= rainfall;
+          if (wetness < 0) wetness = 0;
         }
       }
 
@@ -144,8 +144,6 @@
         }
         let rainfall = randint(0, 5);
         if (t === "mountain") rainfall += 3;
-        wetness -= rainfall;
-        if (wetness < 0) wetness = 0;
         if (wetness > 0) {
           if (t === "desert") {
             map[y][x] = "plains";
@@ -160,8 +158,23 @@
           } else {
             console.log(t)
           }
+          wetness -= rainfall;
+          if (wetness < 0) wetness = 0;
         }
       }
+    }
+  }
+
+  function setup_arctic() {
+    for (let x=0; x<xsize; x++) {
+      map[0][x] = "arctic";
+      map[ysize-1][x] = "arctic";
+    }
+    for(let i=0; i<20; i++) {
+      map[0][randint(0, xsize-1)] = "tundra";
+      map[1][randint(0, xsize-1)] = "tundra";
+      map[ysize-2][randint(0, xsize-1)] = "tundra";
+      map[ysize-1][randint(0, xsize-1)] = "tundra";
     }
   }
 
@@ -172,7 +185,8 @@
     setup_base_map();
     climate_adjustments();
     // erosion();
-    // setup_arctic();
+    // setup_rivers();
+    setup_arctic();
   }
 
   initialize_map();
