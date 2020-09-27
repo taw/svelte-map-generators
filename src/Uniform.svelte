@@ -9,30 +9,30 @@
       points.push({x,y,c});
     }
   }
-  </script>
+</script>
 
-  <style>
-  header {
-    font-size: 400%;
-    text-align: center;
-  }
-  .map {
-    background-color: #ccc;
-    height: 800px;
-    width: 800px;
-    margin: auto;
-    display: block;
-  }
-  rect {
-    stroke-width: 1px;
-    stroke: black;
-  }
-  </style>
+<style>
+header {
+  font-size: 400%;
+  text-align: center;
+}
+.map {
+  background-color: #ccc;
+  height: 800px;
+  width: 800px;
+  margin: auto;
+  display: block;
+}
+rect {
+  stroke-width: 1px;
+  stroke: black;
+}
+</style>
 
-  <header>Uniform Noise</header>
+<header>Uniform Noise</header>
 
-  <svg class="map">
-    {#each points as {x,y,c}}
-      <rect x={20*x} y={20*y} height=20 width=20 style={`fill:${c}`} />
-    {/each}
-  </svg>
+<svg class="map">
+  {#each points as {x,y,c}}
+    <rect x={20*x} y={20*y} height=20 width=20 style={`fill:${c}`} />
+  {/each}
+</svg>

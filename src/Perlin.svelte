@@ -65,28 +65,28 @@
   }
 </script>
 
-  <style>
-  header {
-    font-size: 400%;
-    text-align: center;
-  }
-  .map {
-    background-color: #ccc;
-    height: 800px;
-    width: 800px;
-    margin: auto;
-    display: block;
-  }
-  rect {
-    stroke-width: 1px;
-    stroke: black;
-  }
-  </style>
+<style>
+header {
+  font-size: 400%;
+  text-align: center;
+}
+.map {
+  background-color: #ccc;
+  height: 800px;
+  width: 800px;
+  margin: auto;
+  display: block;
+}
+rect {
+  stroke-width: 1px;
+  stroke: black;
+}
+</style>
 
-  <header>Perlin Noise</header>
+<header>Perlin Noise</header>
 
-  <svg class="map">
-    {#each points as {x,y,c,h}}
-      <rect x={10*x} y={10*y} height=10 width=10 style={`fill:${c}`} data-h={h} />
-    {/each}
-  </svg>
+<svg class="map">
+  {#each points as {x,y,c,h}}
+    <rect x={10*x} y={10*y} height=10 width=10 style={`fill:${c}`} data-h={h} />
+  {/each}
+</svg>
