@@ -18,18 +18,19 @@
     for (let y=0; y<ysize; y++) {
       // arbitrary jitter and scale
       let n =
-          0.4 * noise((x + jx)/1, (y + jy)/1) +
-          0.8 * noise((x + jx)/2, (y + jy)/2) +
-          0.8 * noise((x + jx)/4, (y + jy)/4) +
-          0.4 * noise((x + jx)/8, (y + jy)/8) +
+          0.1 * noise((x + jx)/1, (y + jy)/1) +
+          0.2 * noise((x + jx)/2, (y + jy)/2) +
+          0.4 * noise((x + jx)/4, (y + jy)/4) +
+          0.2 * noise((x + jx)/8, (y + jy)/8) +
           0.2 * noise((x + jx)/16, (y + jy)/16) +
-          0.1 * noise((x + jx)/32, (y + jy)/32) +
-          0.05 * noise((x + jx)/64, (y + jy)/64);
-      let z = 0.4 + 0.8 + 0.8 + 0.4 + 0.2 + 0.1 + 0.05
+          0.2 * noise((x + jx)/32, (y + jy)/32) +
+          0.2 * noise((x + jx)/64, (y + jy)/64);
+      let z = 0.1 + 0.2 + 0.4 + 0.2 + 0.2 + 0.2 + 0.2
       // go way down on edges
       let cx = Math.abs(2*x/(xsize-1) - 1)
       let cy = Math.abs(2*y/(ysize-1) - 1)
-      let h = n/z - Math.max( Math.pow(cx, 2), Math.pow(cy, 2) )
+      console.log(x,cx, Math.pow(cx, 8))
+      let h = n/z - 0.4 * Math.max( Math.pow(cx, 8), Math.pow(cy, 8) )
       points.push({x,y,h});
     }
   }
