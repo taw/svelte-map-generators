@@ -83,7 +83,7 @@ rect {
 }
 </style>
 
-<header>Perlin Noise</header>
+<header>Perlin Noise Island</header>
 
 <svg class="map">
   {#each points as {x,y,c,h}}

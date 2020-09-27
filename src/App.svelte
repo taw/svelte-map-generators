@@ -2,8 +2,9 @@
   import Uniform from "./Uniform.svelte";
   import Perlin from "./Perlin.svelte";
   import Civ1 from "./Civ1.svelte";
+  import DiamondSquare from "./DiamondSquare.svelte";
 
-  let generator = "uniform"
+  let generator = "diamond"
 </script>
 
 <style>
@@ -32,6 +33,7 @@
   <label class:selected={generator==="uniform"}><input type="radio" bind:group={generator} value="uniform"/>Uniform</label>
   <label class:selected={generator==="perlin"}><input type="radio" bind:group={generator} value="perlin"/>Perlin</label>
   <label class:selected={generator==="civ1"}><input type="radio" bind:group={generator} value="civ1"/>Civ1</label>
+  <label class:selected={generator==="diamond"}><input type="radio" bind:group={generator} value="diamond"/>Diamond Square</label>
 </navbar>
 
 {#if generator === "uniform"}
@@ -40,6 +42,8 @@
   <Perlin />
 {:else if generator === "civ1"}
   <Civ1/>
+{:else if generator === "diamond"}
+  <DiamondSquare/>
 {:else}
   No generator selected.
 {/if}
