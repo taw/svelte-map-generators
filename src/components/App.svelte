@@ -3,9 +3,11 @@
   import Perlin from "./Perlin.svelte";
   import Civ1 from "./Civ1.svelte";
   import DiamondSquare from "./DiamondSquare.svelte";
+  import Emoji from "./Emoji.svelte";
 
   let menu = [
     {value: "uniform", nav: "Uniform", header: "Uniform Noise", component: Uniform},
+    {value: "emoji", nav: "Emoji", header: "Emoji Map Symbols", component: Emoji},
     {value: "diamond", nav: "Diamond Square", header: "Diamond Square", component: DiamondSquare},
     {value: "perlin", nav: "Perlin", header: "Perlin Noise Island", component: Perlin},
     {value: "civ1", nav: "Civ1", header: "Civ1 Style Map", component: Civ1},
