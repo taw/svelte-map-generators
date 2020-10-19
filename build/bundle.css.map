@@ -2,12 +2,12 @@
   "version": 3,
   "file": "bundle.css",
   "sources": [
-    "../../App.svelte",
-    "../../Civ1.svelte",
-    "../../DiamondSquare.svelte",
-    "../../Emoji.svelte",
-    "../../Perlin.svelte",
-    "../../Uniform.svelte"
+    "App.svelte",
+    "Civ1.svelte",
+    "DiamondSquare.svelte",
+    "Emoji.svelte",
+    "Perlin.svelte",
+    "Uniform.svelte"
   ],
   "sourcesContent": [
     "<script>\n  import Uniform from \"./Uniform.svelte\";\n  import Perlin from \"./Perlin.svelte\";\n  import Civ1 from \"./Civ1.svelte\";\n  import DiamondSquare from \"./DiamondSquare.svelte\";\n  import Emoji from \"./Emoji.svelte\";\n\n  let menu = [\n    {value: \"uniform\", nav: \"Uniform\", header: \"Uniform Noise\", component: Uniform},\n    {value: \"emoji\", nav: \"Emoji\", header: \"Emoji Map Symbols\", component: Emoji},\n    {value: \"diamond\", nav: \"Diamond Square\", header: \"Diamond Square\", component: DiamondSquare},\n    {value: \"perlin\", nav: \"Perlin\", header: \"Perlin Noise Island\", component: Perlin},\n    {value: \"civ1\", nav: \"Civ1\", header: \"Civ1 Style Map\", component: Civ1},\n  ]\n  let generator = \"civ1\"\n\n  $: selected = menu.find(m => m.value === generator)\n</script>\n\n<style>\n  navbar {\n    display: flex;\n  }\n  navbar label {\n    display: block;\n    background-color: #bbb;\n    padding: 0em 1em;\n  }\n  navbar label.selected {\n    font-weight: bold;\n    background-color: #999;\n  }\n  navbar input {\n    position: absolute;\n    opacity: 0;\n    cursor: pointer;\n    height: 0;\n    width: 0;\n  }\n  header {\n    font-size: 400%;\n    text-align: center;\n  }\n</style>\n\n<navbar>\n  {#each menu as {value,nav}}\n    <label class:selected={generator===value}><input type=\"radio\" bind:group={generator} value={value}>{nav}</label>\n  {/each}\n</navbar>\n\n{#if selected}\n  <header>{selected.header}</header>\n  <svelte:component this={selected.component}/>\n{:else}\n  <p>No generator selected.</p>\n{/if}\n",
