@@ -5,7 +5,7 @@
 
   for (let x = 0; x < xsize; x++) {
     for (let y = 0; y < ysize; y++) {
-      let c = Math.random() > 0.5 ? "green" : "blue";
+      let c = Math.random() > 0.5 ? "lime" : "blue";
       points.push({ x, y, c });
     }
   }
